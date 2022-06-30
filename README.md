@@ -263,16 +263,6 @@ bash scripts/run_standalone_train_ascend.sh [DEVICE_ID] [DATA_DIR]
 > This is processor cores binding operation regarding the `device_num` and total processor numbers. If you are not expect to do it, remove the operations `taskset` in `scripts/run_distribute_train.sh`
 
 
-```bash
-# distribute training example(8p)
-```
-
-- CPU:
-
-```bash
-# standalone training example with shell
-bash scripts/run_standalone_train_cpu.sh DATA_PATH
-```
 
 ### Launch
 
@@ -288,11 +278,8 @@ bash scripts/run_standalone_train_cpu.sh DATA_PATH
       bash scripts/run_standalone_train_ascend.sh [DEVICE_ID] [DATA_DIR]
       # example: bash scripts/run_standalone_train_ascend.sh 0 /home/DataSet/cifar10/
 
-      # distribute training example(8p)
-      CPU:
-      # standalone training example with shell
-      bash scripts/run_standalone_train_cpu.sh DATA_PATH
-```
+    
+    
 
 ### Result
 
@@ -310,14 +297,6 @@ Epoch time: 288507.506, per step time: 230.622
 ```
 
 
-```python
-epoch: 1 step: 1251, loss is 6.49775
-Epoch time: 1487493.604, per step time: 1189.044
-epoch: 2 step: 1251, loss is 5.6884665
-Epoch time: 1421838.433, per step time: 1136.561
-epoch: 3 step: 1251, loss is 5.5168786
-Epoch time: 1423009.501, per step time: 1137.498
-```
 
 ## [Eval process](#contents)
 
@@ -333,8 +312,6 @@ You can start training using python or shell scripts. The usage of shell scripts
 ```
 
 
-```bash
-```
 
 ### Launch
 
@@ -358,9 +335,6 @@ metric: {'Loss': 0.9849, 'Top1-Acc':0.7985, 'Top5-Acc':0.9460}
 ```
 
 
-```python
-metric: {'Loss': 0.8144, 'Top1-Acc': 0.8009, 'Top5-Acc': 0.9457}
-```
 
 ## Model Export
 
@@ -397,36 +371,40 @@ accuracy:80.044
 
 ### Training Performance
 
-| -------------------------- | --------------------------------------------- | -------------------------------- |
-| Model Version              | InceptionV4                                   | InceptionV4                      |
-| Resource                   | Ascend 910; cpu 2.60GHz, 192cores; memory 755G; OS Euler2.8  | NV SMX2 V100-32G                 |
-| uploaded Date              | 11/04/2020                                    | 03/05/2021                       |
-| MindSpore Version          | 1.0.0                                         | 1.0.0                            |
-| Dataset                    | 1200k images                                  | 1200K images                     |
-| Batch_size                 | 128                                           | 128                              |
-| Optimizer                  | RMSProp                                       | RMSProp                          |
-| Loss Function              | SoftmaxCrossEntropyWithLogits                 | SoftmaxCrossEntropyWithLogits    |
-| Outputs                    | probability                                   | probability                      |
-| Loss                       | 0.98486                                       | 0.8144                           |
-| Accuracy (8p)              | ACC1[79.85%] ACC5[94.60%]                     | ACC1[80.09%] ACC5[94.57%]        |
-| Total time (8p)            | 20h                                           | 95h                              |
-| Params (M)                 | 153M                                          | 153M                             |
-| Checkpoint for Fine tuning | 2135M                                         | 489M                             |
-| Scripts                    | [inceptionv4 script](https://gitee.com/mindspore/models/tree/master/official/cv/inceptionv4) | [inceptionv4 script](https://gitee.com/mindspore/models/tree/master/official/cv/inceptionv4) |
+| Parameters                 | Ascend                                        | 
+| -------------------------- | --------------------------------------------- |
+| Model Version              | InceptionV4                                   | 
+| Resource                   | Ascend 910; cpu 2.60GHz, 192cores; memory 755G; OS Euler2.8  | 
+| uploaded Date              | 11/04/2020                                    | 
+| MindSpore Version          | 1.0.0                                         | 
+| Dataset                    | 1200k images                                  | 
+| Batch_size                 | 128                                           | 
+| Training Parameters        | src/model_utils/default_config.yaml (Ascend)    | 
+| Optimizer                  | RMSProp                                       | 
+| Loss Function              | SoftmaxCrossEntropyWithLogits                 | 
+| Outputs                    | probability                                   | 
+| Loss                       | 0.98486                                       | 
+| Accuracy (8p)              | ACC1[79.85%] ACC5[94.60%]                     | 
+| Total time (8p)            | 20h                                           | 
+| Params (M)                 | 153M                                          | 
+| Checkpoint for Fine tuning | 2135M                                         | 
+| Scripts                    | [inceptionv4 script](https://gitee.com/mindspore/models/tree/master/official/cv/inceptionv4) | 
 
 #### Inference Performance
 
-| ------------------- | --------------------------------------------- | ---------------------------------- |
-| Model Version       | InceptionV4                                   | InceptionV4                        |
-| Resource            | Ascend 910; cpu 2.60GHz, 192cores; memory 755G; OS Euler2.8 | NV SMX2 V100-32G                   |
-| Uploaded Date       | 11/04/2020                                    | 03/05/2021                         |
-| MindSpore Version   | 1.0.0                                         | 1.0.0                              |
-| Dataset             | 50k images                                    | 50K images                         |
-| Batch_size          | 128                                           | 128                                |
-| Outputs             | probability                                   | probability                        |
-| Accuracy            | ACC1[79.85%] ACC5[94.60%]                     | ACC1[80.09%] ACC5[94.57%]          |
-| Total time          | 2mins                                         | 2mins                              |
-| Model for inference | 2135M (.ckpt file)                            | 489M (.ckpt file)                  |
+| Parameters          | Ascend                                        |
+| ------------------- | --------------------------------------------- |
+| Model Version       | InceptionV4                                   | 
+| Resource            | Ascend 910; cpu 2.60GHz, 192cores; memory 755G; OS Euler2.8 |
+| Uploaded Date       | 11/04/2020                                    | 
+| MindSpore Version   | 1.0.0                                         | 
+| Dataset             | 50k images                                    | 
+| Batch_size          | 128                                           | 
+| Outputs             | probability                                   | 
+| Accuracy            | ACC1[79.85%] ACC5[94.60%]                     | 
+| Total time          | 2mins                                         |
+| Model for inference | 2135M (.ckpt file)                            |
+
 
 #### Training performance results
 
@@ -438,8 +416,6 @@ accuracy:80.044
 | :--------: | :---------------: |
 |     8p     |     4430 img/s    |
 
-| :--------: | :---------------: |
-|     8p     |     906 img/s    |
 
 # [Description of Random Situation](#contents)
 
